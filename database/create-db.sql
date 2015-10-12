@@ -1,5 +1,17 @@
 CREATE DATABASE `vsr` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
+
+CREATE TABLE `station` (
+  `id` int(11) NOT NULL,
+  `short_code` varchar(6) NOT NULL COMMENT 'Easy to remember short code for station.\nFor example: HYD for HYDERABAD',
+  `station_name` varchar(32) NOT NULL COMMENT 'Name of the station',
+  `district` varchar(32) NOT NULL,
+  `state` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_short_code` (`short_code`),
+  UNIQUE KEY `station_name_UNIQUE` (`station_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `department` (
   `id` int(11) NOT NULL,
   `short_code` varchar(16) NOT NULL,
@@ -46,17 +58,6 @@ CREATE TABLE `invoice` (
   KEY `fk_dept_id_idx` (`dept_id`),
   CONSTRAINT `fk_dept_id` FOREIGN KEY (`dept_id`) REFERENCES `department` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_from_stn_id` FOREIGN KEY (`to_station_id`, `from_station_id`) REFERENCES `faremap` (`to_station_id`, `from_station_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `station` (
-  `id` int(11) NOT NULL,
-  `short_code` varchar(6) NOT NULL COMMENT 'Easy to remember short code for station.\nFor example: HYD for HYDERABAD',
-  `station_name` varchar(32) NOT NULL COMMENT 'Name of the station',
-  `district` varchar(32) NOT NULL,
-  `state` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_short_code` (`short_code`),
-  UNIQUE KEY `station_name_UNIQUE` (`station_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `task_list` (

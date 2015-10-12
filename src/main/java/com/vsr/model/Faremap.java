@@ -1,67 +1,36 @@
 package com.vsr.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 /**
  * Created by lakshmanch on 5/10/15.
  */
 @Entity
-@IdClass(FaremapPK.class)
 @Table(name="faremap")
+//TODO , uniqueConstraints = {@UniqueConstraint(name = "uk_from_to", columnNames = {"from_stn_id","to_stn_id"})})
+@Data
+@EqualsAndHashCode(of = {"id"})
 public class Faremap {
-    private int fromStationId;
-    private int toStationId;
-    private float fare;
 
     @Id
-    @Column(name = "from_station_id", nullable = false, insertable = true, updatable = true)
-    public int getFromStationId() {
-        return fromStationId;
-    }
+    @GeneratedValue
+    @Column(name = "fare_id", nullable = false, insertable = false, updatable = false)
+    private int id;
 
-    public void setFromStationId(int fromStationId) {
-        this.fromStationId = fromStationId;
-    }
+    @OneToOne(fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "from_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_fromstn"))
+    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false)
+    private Station fromStation;
 
-    @Id
-    @Column(name = "to_station_id", nullable = false, insertable = true, updatable = true)
-    public int getToStationId() {
-        return toStationId;
-    }
-
-    public void setToStationId(int toStationId) {
-        this.toStationId = toStationId;
-    }
+    @OneToOne(fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "to_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_tostn"))
+    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false)
+    private Station toStation;
 
     @Basic
     @Column(name = "fare", nullable = false, insertable = true, updatable = true, precision = 0)
-    public float getFare() {
-        return fare;
-    }
-
-    public void setFare(float fare) {
-        this.fare = fare;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Faremap faremap = (Faremap) o;
-
-        if (fromStationId != faremap.fromStationId) return false;
-        if (toStationId != faremap.toStationId) return false;
-        if (Float.compare(faremap.fare, fare) != 0) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = fromStationId;
-        result = 31 * result + toStationId;
-        result = 31 * result + (fare != +0.0f ? Float.floatToIntBits(fare) : 0);
-        return result;
-    }
+    private float fare;
 }
