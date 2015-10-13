@@ -1,4 +1,4 @@
-app.controller('station-ctrl', function($scope, $http, $filter, ngTableParams, appServices) {
+app.controller('stations-ctrl', function($scope, $http, $filter, ngTableParams, appServices) {
 	
 	$scope.searchKeyword = "";
 	$scope.getList = function(callback) {

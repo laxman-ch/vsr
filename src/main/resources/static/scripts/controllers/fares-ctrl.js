@@ -1,10 +1,10 @@
-app.controller('task-ctrl', function($scope, $http, $filter, ngTableParams, appServices) {
+app.controller('fares-ctrl', function($scope, $http, $filter, ngTableParams, appServices) {
 	
 	$scope.searchKeyword = "";
 	$scope.getList = function(callback) {
 		$http({
 			method: 'GET',
-			url: '/tasks'
+			url: '/faremaps'
 		}).then(function(response) {
 			if(typeof response.data._embedded != 'undefined') {
 				$scope.tasks = response.data._embedded.tasks;

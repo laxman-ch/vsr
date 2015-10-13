@@ -26,8 +26,7 @@ public class Invoice {
     private String waybillNumber;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_deptid"))
-    @JoinColumn(name = "dept_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "dept_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_deptid"))
     private Department department;
 
     @Basic
@@ -35,13 +34,11 @@ public class Invoice {
     private Date date;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "from_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_fromstn"))
-    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_fromstn"))
     private Station fromStation;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "to_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_tostn"))
-    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_tostn"))
     private Station toStation;
 
     @Basic

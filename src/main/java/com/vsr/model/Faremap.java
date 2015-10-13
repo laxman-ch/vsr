@@ -9,8 +9,7 @@ import javax.persistence.*;
  * Created by lakshmanch on 5/10/15.
  */
 @Entity
-@Table(name="faremap")
-//TODO , uniqueConstraints = {@UniqueConstraint(name = "uk_from_to", columnNames = {"from_stn_id","to_stn_id"})})
+@Table(name="faremap", uniqueConstraints = {@UniqueConstraint(name = "uk_fares_fromto", columnNames = {"from_stn_id","to_stn_id"})})
 @Data
 @EqualsAndHashCode(of = {"id"})
 public class Faremap {
@@ -21,13 +20,11 @@ public class Faremap {
     private int id;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "from_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_fromstn"))
-    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_fromstn"))
     private Station fromStation;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "to_stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_tostn"))
-    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false)
+    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_fares_tostn"))
     private Station toStation;
 
     @Basic

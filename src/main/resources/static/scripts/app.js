@@ -5,33 +5,33 @@ app.config(function($routeProvider) {
         // route for the home page
         .when('/', {
             templateUrl : 'pages/stations.html',
-            controller  : 'station-ctrl',
-            activetab:'station'
+            controller  : 'stations-ctrl',
+            activetab:'stations'
         })
         
-        .when('/station', {
+        .when('/stations', {
             templateUrl : 'pages/stations.html',
-            controller  : 'station-ctrl',
-            activetab:'station'
+            controller  : 'stations-ctrl',
+            activetab:'stations'
         })
 
         // route for the about page
-        .when('/department', {
+        .when('/departments', {
             templateUrl : 'pages/departments.html',
-            controller  : 'department-ctrl',
-            activetab:'department'
+            controller  : 'departments-ctrl',
+            activetab:'departments'
         })
         
         // route for the about page
-        .when('/tasks', {
-            templateUrl : 'pages/tasks.html',
-            controller  : 'task-ctrl',
-            activetab:'tasks'
+        .when('/fares', {
+            templateUrl : 'pages/fares.html',
+            controller  : 'fares-ctrl',
+            activetab:'fares'
         })
         
         .when('/invoices', {
-            templateUrl : 'pages/invoice.html',
-            controller  : 'invoice-ctrl',
+            templateUrl : 'pages/invoices.html',
+            controller  : 'invoices-ctrl',
             activetab:'invoices'
         })
 });
