@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource
+@RepositoryRestResource(excerptProjection = InvoiceDetails.class)
 public interface InvoiceRepository extends PagingAndSortingRepository<Invoice, Long> {
     List<Invoice> findByDepartmentId(@Param("deptid") int deptid);
 }
