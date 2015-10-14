@@ -1,5 +1,6 @@
 package com.vsr.boot;
 
+import com.vsr.dao.FareDetailsProjection;
 import com.vsr.model.Department;
 import com.vsr.model.Faremap;
 import com.vsr.model.Invoice;
@@ -15,7 +16,8 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 public class RepositoryConfiguration extends RepositoryRestMvcConfiguration {
     @Override
     protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        super.configureRepositoryRestConfiguration(config);
         config.exposeIdsFor(Station.class, Department.class, Faremap.class, Invoice.class);
+        config.projectionConfiguration().addProjection(FareDetailsProjection.class);
+        super.configureRepositoryRestConfiguration(config);
     }
 }

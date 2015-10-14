@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by lakshmanch on 5/10/15.
  */
 @Entity
-@Table(name="faremap", uniqueConstraints = {@UniqueConstraint(name = "uk_fares_fromto", columnNames = {"from_stn_id","to_stn_id"})})
+@Table(name = "faremap", uniqueConstraints = {@UniqueConstraint(name = "uk_fares_fromto", columnNames = {"from_stn_id", "to_stn_id"})})
 @Data
 @EqualsAndHashCode(of = {"id"})
 public class Faremap {

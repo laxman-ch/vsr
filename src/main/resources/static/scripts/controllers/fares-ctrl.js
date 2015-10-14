@@ -4,7 +4,7 @@ app.controller('fares-ctrl', function($scope, $http, $filter, ngTableParams, app
 	$scope.getList = function(callback) {
 		$http({
 			method: 'GET',
-			url: '/faremaps'
+			url: '/fares'
 		}).then(function(response) {
 			if(typeof response.data._embedded != 'undefined') {
 				$scope.tasks = response.data._embedded.tasks;
