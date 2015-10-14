@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(of = {"id"})
 public class Faremap {
-
     @Id
     @GeneratedValue
     @Column(name = "fare_id", nullable = false, insertable = false, updatable = false)

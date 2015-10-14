@@ -8,13 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 @Configuration
 @ComponentScan(basePackages = {"com.vsr", "com.vsr.dao"})
 @EnableJpaRepositories(basePackages = {"com.vsr.dao"})
 @EntityScan(basePackages = {"com.vsr"})
-@Import(RepositoryRestMvcConfiguration.class)
+@Import({RepositoryConfiguration.class})
 @EnableAutoConfiguration
 @PropertySource("application.properties")
 public class Application {
