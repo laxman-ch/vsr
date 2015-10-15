@@ -1,37 +1,37 @@
-var app = angular.module('app',['ngRoute', 'ui.bootstrap', 'ngTable']);
+var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls', 'ngTable']);
 
-app.config(function($routeProvider) {
-        $routeProvider
+app.config(function ($routeProvider) {
+    $routeProvider
         // route for the home page
         .when('/', {
-            templateUrl : 'pages/stations.html',
-            controller  : 'stations-ctrl',
-            activetab:'stations'
+            templateUrl: 'pages/stations.html',
+            controller: 'station-ctrl',
+            activetab: 'stations'
         })
-        
+
         .when('/stations', {
-            templateUrl : 'pages/stations.html',
-            controller  : 'stations-ctrl',
-            activetab:'stations'
+            templateUrl: 'pages/stations.html',
+            controller: 'station-ctrl',
+            activetab: 'stations'
         })
 
         // route for the about page
         .when('/departments', {
-            templateUrl : 'pages/departments.html',
-            controller  : 'departments-ctrl',
-            activetab:'departments'
+            templateUrl: 'pages/departments.html',
+            controller: 'department-ctrl',
+            activetab: 'departments'
         })
-        
+
         // route for the about page
         .when('/fares', {
-            templateUrl : 'pages/fares.html',
-            controller  : 'fares-ctrl',
-            activetab:'fares'
+            templateUrl: 'pages/fares.html',
+            controller: 'fares-ctrl',
+            activetab: 'fares'
         })
-        
+
         .when('/invoices', {
-            templateUrl : 'pages/invoices.html',
-            controller  : 'invoices-ctrl',
-            activetab:'invoices'
+            templateUrl: 'pages/invoices.html',
+            controller: 'invoices-ctrl',
+            activetab: 'invoices'
         })
 });
