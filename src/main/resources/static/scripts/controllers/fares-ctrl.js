@@ -87,11 +87,19 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
 
     $scope.submitData = function (modalData) {
 
+        //modalData.submitData.toStation = "stations/" + modalData.submitData.toStation;
+        //modalData.submitData.fromStation = "stations/" + modalData.submitData.fromStation;
+
         if (modalData.action == 'add') {
             $http({
                 method: 'POST',
                 url: '/fares',
-                data: modalData.submitData
+                //data: modalData.submitData
+                data: {
+                    fromStation: "stations/" + modalData.submitData.fromStation,
+                    toStation: "stations/" + modalData.submitData.toStation,
+                    fare: modalData.submitData.fare
+                }
 
             }).then(function (response) {
                 $scope.getList($scope.initTable);
@@ -104,8 +112,12 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
             $http({
                 method: 'PUT',
                 url: '/fares/' + $scope.selectedId,
-                data: modalData.submitData
-
+                //data: modalData.submitData
+                data: {
+                    fromStation: "stations/" + modalData.submitData.fromStation,
+                    toStation: "stations/" + modalData.submitData.toStation,
+                    fare: modalData.submitData.fare
+                }
             }).then(function (response) {
                 $scope.getList($scope.initTable);
             }, function (response) {
@@ -169,12 +181,12 @@ app.controller('fareModalCtrl', function ($scope, $http, $modalInstance, dataToM
         if ($scope.action == 'edit') {
             $http({
                 method: 'GET',
-                url: '/fares/' + dataToModal.id
+                url: '/fares/' + dataToModal.id + "?projection=fare_details"
             }).then(function (response) {
                 if (response.status == '200') {
                     $scope.submitData.fare = response.data.fare;
-                    $scope.submitData.fromStation = $scope.fromStation.toString();
-                    $scope.submitData.toStation = $scope.toStation.toString();
+                    $scope.submitData.fromStation = $scope.fromStation.id;
+                    $scope.submitData.toStation = $scope.toStation.id;
                 }
             }, function (response) {
 

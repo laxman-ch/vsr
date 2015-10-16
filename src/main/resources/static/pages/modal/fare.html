@@ -11,9 +11,9 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="group_name">From Station</label>
-                        <select class="form-control" ng-model="submitData.fromStation">
+                        <select class="form-control" ng-init="submitData.fromStation.id" ng-model="submitData.fromStation">
                             <option value="">Select</option>
-                            <option ng-repeat="station in stations" value="stations/{{station.id}}">
+                            <option ng-repeat="station in stations" value="{{station.id}}">
                                 {{station.stationName}}
                             </option>
                         </select>
@@ -22,9 +22,9 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="name">To Station</label>
-                        <select class="form-control" ng-model="submitData.toStation">
+                        <select class="form-control" ng-init="submitData.toStation.id" ng-model="submitData.toStation">
                             <option value="">Select</option>
-                            <option ng-repeat="station in stations" value="stations/{{station.id}}">
+                            <option ng-repeat="station in stations" value="{{station.id}}">
                                 {{station.stationName}}
                             </option>
                         </select>
