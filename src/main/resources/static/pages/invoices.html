@@ -6,48 +6,86 @@
 </div>
 
 
-<!-- div class="table-responsive">
+<div class="table-responsive">
 	<table class="table" ng-table="tableParams">
 		<thead>
-			<tr>
-				<th width="20"><input type="checkbox" /></th>
-				<th class="sortable"  ng-class="{
-                        'sort-asc': tableParams.isSortBy('name', 'asc'),
-                        'sort-desc': tableParams.isSortBy('name', 'desc')
+		<tr>
+			<th width="20"><input type="checkbox"/></th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('waybillNumber', 'asc'),
+                        'sort-desc': tableParams.isSortBy('waybillNumber', 'desc')
                     }"
-                    ng-click="tableParams.sorting({'name' : tableParams.isSortBy('name', 'asc') ? 'desc' : 'asc'})">Name</th>
-				<th class="sortable"  ng-class="{
-                        'sort-asc': tableParams.isSortBy('address', 'asc'),
-                        'sort-desc': tableParams.isSortBy('address', 'desc')
+				ng-click="tableParams.sorting({'waybillNumber' : tableParams.isSortBy('waybillNumber', 'asc') ? 'desc' : 'asc'})">
+				Waybill#
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('date', 'asc'),
+                        'sort-desc': tableParams.isSortBy('date', 'desc')
                     }"
-                    ng-click="tableParams.sorting({'address' : tableParams.isSortBy('address', 'asc') ? 'desc' : 'asc'})">Short Name</th>
-				<th class="sortable"  ng-class="{
-                        'sort-asc': tableParams.isSortBy('details', 'asc'),
-                        'sort-desc': tableParams.isSortBy('details', 'desc')
+				ng-click="tableParams.sorting({'date' : tableParams.isSortBy('date', 'asc') ? 'desc' : 'asc'})">Date
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('fromDepartment.name', 'asc'),
+                        'sort-desc': tableParams.isSortBy('fromDepartment.name', 'desc')
                     }"
-                    ng-click="tableParams.sorting({'details' : tableParams.isSortBy('district', 'asc') ? 'details' : 'asc'})">District</th>
-				<th class="sortable"  ng-class="{
-                        'sort-asc': tableParams.isSortBy('shortCode', 'asc'),
-                        'sort-desc': tableParams.isSortBy('shortCode', 'desc')
+				ng-click="tableParams.sorting({'fromDepartment.name' : tableParams.isSortBy('fromDepartment.name', 'asc') ? 'desc' : 'asc'})">
+				From Department
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('toDepartment.name', 'asc'),
+                        'sort-desc': tableParams.isSortBy('toDepartment.name', 'desc')
                     }"
-                    ng-click="tableParams.sorting({'shortCode' : tableParams.isSortBy('shortCode', 'asc') ? 'desc' : 'asc'})">Short Code</th>
-				<th>Actions</th>
-			</tr>
+				ng-click="tableParams.sorting({'toDepartment.name' : tableParams.isSortBy('toDepartment.name', 'asc') ? 'desc' : 'asc'})">
+				To Department
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('fromStation.stationName', 'asc'),
+                        'sort-desc': tableParams.isSortBy('fromStation.stationName', 'desc')
+                    }"
+				ng-click="tableParams.sorting({'fromStation.stationName' : tableParams.isSortBy('fromStation.stationName', 'asc') ? 'desc' : 'asc'})">
+				From Station
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('toStation.stationName', 'asc'),
+                        'sort-desc': tableParams.isSortBy('toStation.stationName', 'desc')
+                    }"
+				ng-click="tableParams.sorting({'toStation.stationName' : tableParams.isSortBy('toStation.stationName', 'asc') ? 'desc' : 'asc'})">
+				To Station
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('dcNumber', 'asc'),
+                        'sort-desc': tableParams.isSortBy('dcNumber', 'desc')
+                    }"
+				ng-click="tableParams.sorting({'dcNumber' : tableParams.isSortBy('dcNumber', 'asc') ? 'desc' : 'asc'})">DC#
+			</th>
+			<th class="sortable" ng-class="{
+                        'sort-asc': tableParams.isSortBy('total', 'asc'),
+                        'sort-desc': tableParams.isSortBy('total', 'desc')
+                    }"
+				ng-click="tableParams.sorting({'total' : tableParams.isSortBy('total', 'asc') ? 'desc' : 'asc'})">Total
+			</th>
+			<th>Actions</th>
+		</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="data in $data">
-				<td><input type="checkbox" /></td>
-				<td>{{data.name}}</td>
-				<td>{{data.address}}</td>
-				<td>{{data.details}}</td>
-				<td>{{data.shortCode}}</td>
-				<td>
-					<a href="javascript:void(0)">Edit<a>
-					|
-					<a href="javascript:void(0)"ng-click="deleteItem(data._links.self.href)">Delete<a>
-				</td>
-			</tr>
+		<tr ng-repeat="data in $data">
+			<td><input type="checkbox"/></td>
+			<td>{{data.waybillNumber}}</td>
+			<td>{{data.date}}</td>
+			<td>{{data.fromDepartment.name}} ({{data.fromDepartment.shortCode}})</td>
+			<td>{{data.toDepartment.name}} ({{data.toDepartment.shortCode}})</td>
+			<td>{{data.fromStation.stationName}} ({{data.fromStation.shortCode}})</td>
+			<td>{{data.toStation.stationName}} ({{data.toStation.shortCode}})</td>
+			<td>{{data.dcNumber}}</td>
+			<td>{{data.total}}</td>
+			<td>
+				<a href="javascript:void(0)" ng-click="addEdit('edit', data.id, data.fromStation.id, data.toStation.id)">Edit</a>
+				|
+				<a href="javascript:void(0)" ng-click="deleteItem(data._links.self.href)">Delete</a>
+				|
+				<a href="javascript:void(0)" ng-click="printItem(data._links.self.href)">Print</a>
+			</td>
+		</tr>
 		</tbody>
 	</table>
-</div -->
-
+</div>

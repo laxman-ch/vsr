@@ -16,7 +16,9 @@ public interface InvoiceDetails {
 
     public String getWaybillNumber();
 
-    public Department getDepartment();
+    public Department getFromDepartment();
+
+    public Department getToDepartment();
 
     public Date getDate();
 

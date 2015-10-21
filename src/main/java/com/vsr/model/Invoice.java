@@ -25,8 +25,12 @@ public class Invoice {
     private String waybillNumber;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dept_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_deptid"))
-    private Department department;
+    @JoinColumn(name = "from_dept_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_frmdeptid"))
+    private Department fromDepartment;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "to_dept_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "dept_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_todeptid"))
+    private Department toDepartment;
 
     @Basic
     @Column(name = "date", nullable = false, insertable = true, updatable = true)

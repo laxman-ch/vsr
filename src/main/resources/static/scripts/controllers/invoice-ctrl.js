@@ -1,18 +1,18 @@
-app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTableParams, appServices) {
+app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTableParams, appServices) {
 
     $scope.searchKeyword = "";
     $scope.getList = function (callback) {
 
         $http({
             method: 'GET',
-            url: '/fares'
+            url: '/invoices'
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
 
-                $scope.fares = response.data._embedded.fares;
+                $scope.invoices = response.data._embedded.invoices;
             }
             else {
-                $scope.fares = [];
+                $scope.invoices = [];
             }
             callback.call(this);
         }, function (response) {
@@ -41,14 +41,14 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
     $scope.initTable = function () {
         $scope.tableParams = new ngTableParams({
             page: 1,
-            count: 10,
+            count: 2000,
             sorting: {
-                "fromStation.stationName": "asc"
+                "waybillNumber": "asc"
             }
         }, {
             counts: [],
             getData: function ($defer, params) {
-                appServices.tablePagination($defer, $filter, params, $scope.fares, $scope.searchKeyword);
+                appServices.tablePagination($defer, $filter, params, $scope.invoices, $scope.searchKeyword);
 
             }
         });
@@ -61,8 +61,8 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
 
         $scope.modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'pages/modal/fare.html',
-            controller: 'fareModalCtrl',
+            templateUrl: 'pages/modal/invoice.html',
+            controller: 'invoiceModalCtrl',
             size: 'md',
             backdrop: 'static',
             resolve: {
@@ -70,7 +70,8 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
                     return {
                         action: $scope.action,
                         id: $scope.selectedId,
-                        stations: $scope.stations
+                        stations: $scope.stations,
+                        departments: $scope.departments
                     }
                 }
             }
@@ -84,16 +85,17 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
     };
 
     $scope.submitData = function (modalData) {
+        dataToSend = modalData.submitData;
+        dataToSend.fromDepartment = "departments/" + modalData.submitData.fromDepartment
+        dataToSend.toDepartment = "departments/" + modalData.submitData.toDepartment
+        dataToSend.fromStation = "stations/" + modalData.submitData.fromStation
+        dataToSend.toStation = "stations/" + modalData.submitData.toStation
+
         if (modalData.action == 'add') {
             $http({
                 method: 'POST',
-                url: '/fares',
-                data: {
-                    fromStation: "stations/" + modalData.submitData.fromStation,
-                    toStation: "stations/" + modalData.submitData.toStation,
-                    fare: modalData.submitData.fare
-                }
-
+                url: '/invoices',
+                data: dataToSend
             }).then(function (response) {
                 $scope.getList($scope.initTable);
             }, function (response) {
@@ -104,12 +106,8 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
         else if (modalData.action == 'edit') {
             $http({
                 method: 'PUT',
-                url: '/fares/' + $scope.selectedId,
-                data: {
-                    fromStation: "stations/" + modalData.submitData.fromStation,
-                    toStation: "stations/" + modalData.submitData.toStation,
-                    fare: modalData.submitData.fare
-                }
+                url: '/invoices/' + $scope.selectedId,
+                data: dataToSend
             }).then(function (response) {
                 $scope.getList($scope.initTable);
             }, function (response) {
@@ -140,8 +138,32 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
         });
     };
 
+    $scope.getAllDepartments = function () {
+        $http({
+            method: 'GET',
+            url: '/departments',
+            data: {
+                page: 1,
+                size: 2000,
+                sort: 'name'
+            }
+        }).then(function (response) {
+            if (typeof response.data._embedded != 'undefined') {
+                $scope.departments = response.data._embedded.departments;
+            }
+            else {
+                $scope.departments = [];
+            }
+
+        }, function (response) {
+
+        });
+    };
+
+
     $scope.init = function () {
         $scope.getAllStations();
+        $scope.getAllDepartments();
         $scope.getList($scope.initTable);
     }
 
@@ -150,9 +172,12 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
 });
 
 
-app.controller('fareModalCtrl', function ($scope, $http, $modalInstance, dataToModal) {
+app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, dataToModal) {
     $scope.action = dataToModal.action;
+    $scope.departments = dataToModal.departments;
     $scope.stations = dataToModal.stations;
+    $scope.fromDepartment = dataToModal.fromDepartment;
+    $scope.toDepartment = dataToModal.toDepartment;
     $scope.fromStation = dataToModal.fromStation;
     $scope.toStation = dataToModal.toStation;
 
@@ -172,7 +197,7 @@ app.controller('fareModalCtrl', function ($scope, $http, $modalInstance, dataToM
         if ($scope.action == 'edit') {
             $http({
                 method: 'GET',
-                url: '/fares/' + dataToModal.id + "?projection=fare_details"
+                url: '/invoices/' + dataToModal.id + "?projection=invoice_details"
             }).then(function (response) {
                 if (response.status == '200') {
                     $scope.submitData.fare = response.data.fare;

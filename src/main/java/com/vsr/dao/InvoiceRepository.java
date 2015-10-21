@@ -9,5 +9,6 @@ import java.util.List;
 
 @RepositoryRestResource(excerptProjection = InvoiceDetails.class)
 public interface InvoiceRepository extends PagingAndSortingRepository<Invoice, Long> {
-    List<Invoice> findByDepartmentId(@Param("deptid") int deptid);
+    List<Invoice> findByFromDepartmentId(@Param("fromdeptid") int fromDeptId);
+    List<Invoice> findByToDepartmentId(@Param("todeptid") int toDeptId);
 }

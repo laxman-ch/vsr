@@ -42,10 +42,9 @@
             <td>{{data.toStation.stationName}} ({{data.toStation.shortCode}})</td>
             <td>Rs. {{data.fare}}/-</td>
             <td>
-                <a href="javascript:void(0)"
-                   ng-click="addEdit('edit', data.id, data.fromStation.id, data.toStation.id)">Edit<a>
-                    |
-                    <a href="javascript:void(0)" ng-click="deleteItem(data._links.self.href)">Delete<a>
+                <a href="javascript:void(0)" ng-click="addEdit('edit', data.id)">Edit</a>
+                |
+                <a href="javascript:void(0)" ng-click="deleteItem(data._links.self.href)">Delete</a>
             </td>
         </tr>
         </tbody>
