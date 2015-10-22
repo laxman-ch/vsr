@@ -137,10 +137,7 @@ app.controller('stationModalCtrl', function ($scope, $http, $modalInstance, data
                 url: '/stations/' + dataToModal.id
             }).then(function (response) {
                 if (response.status == '200') {
-                    $scope.submitData.district = response.data.district;
-                    $scope.submitData.stationName = response.data.stationName;
-                    $scope.submitData.state = response.data.state;
-                    $scope.submitData.shortCode = response.data.shortCode;
+                    $scope.submitData = response.data;
                 }
 
             }, function (response) {

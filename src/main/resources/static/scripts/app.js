@@ -31,7 +31,7 @@ app.config(function ($routeProvider) {
 
         .when('/invoices', {
             templateUrl: 'pages/invoices.html',
-            controller: 'invoices-ctrl',
+            controller: 'invoice-ctrl',
             activetab: 'invoices'
         })
 });

@@ -138,10 +138,7 @@ app.controller('departmentModalCtrl', function ($scope, $http, $modalInstance, d
                 url: '/departments/' + dataToModal.id
             }).then(function (response) {
                 if (response.status == '200') {
-                    $scope.submitData.name = response.data.name;
-                    $scope.submitData.address = response.data.address;
-                    $scope.submitData.details = response.data.details;
-                    $scope.submitData.shortCode = response.data.shortCode;
+                    $scope.submitData = response.data;
                 }
 
             }, function (response) {

@@ -153,8 +153,6 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
 app.controller('fareModalCtrl', function ($scope, $http, $modalInstance, dataToModal) {
     $scope.action = dataToModal.action;
     $scope.stations = dataToModal.stations;
-    $scope.fromStation = dataToModal.fromStation;
-    $scope.toStation = dataToModal.toStation;
 
     $scope.submitData = {};
     $scope.ok = function () {
@@ -175,9 +173,7 @@ app.controller('fareModalCtrl', function ($scope, $http, $modalInstance, dataToM
                 url: '/fares/' + dataToModal.id + "?projection=fare_details"
             }).then(function (response) {
                 if (response.status == '200') {
-                    $scope.submitData.fare = response.data.fare;
-                    $scope.submitData.fromStation = $scope.fromStation;
-                    $scope.submitData.toStation = $scope.toStation;
+                    $scope.submitData = response.data;
                 }
 
             }, function (response) {

@@ -1,7 +1,9 @@
 package com.vsr.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,12 +39,8 @@ public class Invoice {
     private Date date;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "from_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_fromstn"))
-    private Station fromStation;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "to_stn_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "stn_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_tostn"))
-    private Station toStation;
+    @JoinColumn(name = "fare_id", insertable = true, updatable = true, nullable = false, referencedColumnName = "fare_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_invc_faremapid"))
+    private Faremap faremap;
 
     @Basic
     @Column(name = "dc_number", nullable = false, insertable = true, updatable = true, length = 32)

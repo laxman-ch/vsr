@@ -1,8 +1,8 @@
 package com.vsr.dao;
 
 import com.vsr.model.Department;
+import com.vsr.model.Faremap;
 import com.vsr.model.Invoice;
-import com.vsr.model.Station;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Date;
@@ -22,9 +22,7 @@ public interface InvoiceDetails {
 
     public Date getDate();
 
-    public Station getFromStation();
-
-    public Station getToStation();
+    public Faremap getFaremap();
 
     public String getDcNumber();
 

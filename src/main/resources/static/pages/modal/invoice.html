@@ -9,22 +9,35 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group">
-                        <label for="group_name">From Station</label>
-                        <select class="form-control" ng-init="submitData.fromStation.id" ng-model="submitData.fromStation">
+                        <label for="type">Waybill#</label>
+                        <input type="text" class="form-control" placeholder="WayBill#" ng-model="submitData.waybillNumber">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Date</label>
+                        <input type="date" class="form-control" placeholder="Booking Date" ng-model="submitData.date">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="group_name">From Department</label>
+                        <select class="form-control" ng-init="submitData.fromDepartment" ng-model="submitData.fromDepartment">
                             <option value="">Select</option>
-                            <option ng-repeat="station in stations" value="{{station.id}}">
-                                {{station.stationName}}
+                            <option ng-repeat="department in departments" value="{{department.id}}">
+                                {{department.name}}
                             </option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="form-group">
-                        <label for="name">To Station</label>
-                        <select class="form-control" ng-init="submitData.toStation" ng-model="submitData.toStation">
+                        <label for="group_name">To Department</label>
+                        <select class="form-control" ng-init="submitData.toDepartment" ng-model="submitData.toDepartment">
                             <option value="">Select</option>
-                            <option ng-repeat="station in stations" value="{{station.id}}">
-                                {{station.stationName}}
+                            <option ng-repeat="department in departments" value="{{department.id}}">
+                                {{department.name}}
                             </option>
                         </select>
                     </div>
@@ -32,10 +45,115 @@
 
                 <div class="col-xs-6">
                     <div class="form-group">
-                        <label for="type">Fare</label>
-                        <input type="text" class="form-control" placeholder="Fare" ng-model="submitData.fare">
+                        <label for="type">From Address</label>
+                        <textarea class="form-control" placeholder="From Address" ng-model="submitData.fromAddress"></textarea>
                     </div>
                 </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">To Address</label>
+                        <textarea class="form-control" placeholder="To Address" ng-model="submitData.toAddress"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="group_name">FromTo Station</label>
+                        <select class="form-control" ng-init="submitData.faremap" ng-model="submitData.faremap">
+                            <option value="">Select</option>
+                            <option ng-repeat="faremap in fares" value="{{faremap.id}}">
+                                {{faremap.fromStation.shortCode}} -> {{faremap.toStation.shortCode}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">DC Number</label>
+                        <input type="text" class="form-control" placeholder="DC Number" ng-model="submitData.dcNumber">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Goods value</label>
+                        <input type="number" class="form-control" placeholder="Goods value" ng-model="submitData.goodsValue">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Package Count</label>
+                        <input type="number" class="form-control" placeholder="Package Count" ng-model="submitData.packageCount">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Weight (KG)</label>
+                        <input type="number" class="form-control" placeholder="Weight in KG" ng-model="submitData.weight">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Freight</label>
+                        <input type="number" class="form-control" placeholder="Freight" ng-model="submitData.freight">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Value Surcharge</label>
+                        <input type="number" class="form-control" placeholder="value surcharge" ng-model="submitData.valueSurcharge">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Door Delivery Charges</label>
+                        <input type="number" class="form-control" placeholder="Door Delivery Charges" ng-model="submitData.doordelCharges">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Article Charges</label>
+                        <input type="number" class="form-control" placeholder="Article Charges" ng-model="submitData.articleCharges">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Stat Charges</label>
+                        <input type="number" class="form-control" placeholder="Stat Charges" ng-model="submitData.statCharges">
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Handling Charges</label>
+                        <input type="number" class="form-control" placeholder="Handling Charges" ng-model="submitData.handlingCharges">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Other Charges</label>
+                        <input type="number" class="form-control" placeholder="Other Charges" ng-model="submitData.otherCharges">
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="type">Description</label>
+                        <textarea class="form-control" placeholder="Description" ng-model="submitData.description"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Total</label>
+                        <input type="number" class="form-control" placeholder="Grand Total" ng-model="submitData.total">
+                    </div>
+                </div>
+
             </div>
         </form>
     </div>
