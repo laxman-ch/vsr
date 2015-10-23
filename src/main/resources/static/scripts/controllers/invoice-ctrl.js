@@ -62,7 +62,7 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
             animation: $scope.animationsEnabled,
             templateUrl: 'pages/modal/invoice.html',
             controller: 'invoiceModalCtrl',
-            size: 'md',
+            size: 'lg',
             backdrop: 'static',
             resolve: {
                 dataToModal: function () {
@@ -84,28 +84,7 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
     };
 
     $scope.printItem = function (id) {
-        $scope.selectedId = id;
-
-        $scope.modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'pages/modal/print-invoice.html',
-            controller: 'printInvoiceModalCtrl',
-            size: 'md',
-            backdrop: 'static',
-            resolve: {
-                dataToModal: function () {
-                    return {
-                        id: $scope.selectedId,
-                    }
-                }
-            }
-        });
-
-        $scope.modalInstance.result.then(function (modalData) {
-            $scope.submitData(modalData);
-        }, function () {
-            console.info('Modal dismissed at: ' + new Date());
-        });
+        window.open('#/invoice/print/' + id, "", "width=900, height=700");
     };
 
     $scope.submitData = function (modalData) {
@@ -199,9 +178,16 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
     $scope.action = dataToModal.action;
     $scope.departments = dataToModal.departments;
     $scope.fares = dataToModal.fares;
-
-    $scope.submitData = {};
+    
     $scope.ok = function () {
+
+        $scope.submitData.total = $scope.submitData.valueSurcharge + 
+                        $scope.submitData.doordelCharges + 
+                        $scope.submitData.articleCharges + 
+                        $scope.submitData.statCharges + 
+                        $scope.submitData.handlingCharges +  
+                        $scope.submitData.otherCharges;
+
         $modalInstance.close({
             submitData: $scope.submitData,
             action: $scope.action
@@ -223,6 +209,9 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
                     $scope.submitData.faremap = response.data.faremap.id;
                     $scope.submitData.fromDepartment = response.data.fromDepartment.id;
                     $scope.submitData.toDepartment = response.data.toDepartment.id;
+                    $scope.submitData.date = new Date($scope.submitData.date);
+
+                    
                 }
 
             }, function (response) {
@@ -239,38 +228,3 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
     $scope.init();
 });
 
-
-app.controller('printInvoiceModalCtrl', function ($scope, $http, $modalInstance, dataToModal) {
-    $scope.submitData = {};
-    $scope.ok = function () {
-        $modalInstance.close({
-            submitData: $scope.submitData,
-            action: $scope.action
-        });
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-    $scope.getData = function () {
-        $http({
-            method: 'GET',
-            url: '/invoices/' + dataToModal.id + "?projection=invoice_details"
-        }).then(function (response) {
-            if (response.status == '200') {
-                $scope.submitData = response.data;
-            }
-
-        }, function (response) {
-
-        });
-    };
-
-    $scope.init = function () {
-        $scope.getData();
-    };
-
-
-    $scope.init();
-});

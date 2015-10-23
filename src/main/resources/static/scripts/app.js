@@ -34,4 +34,10 @@ app.config(function ($routeProvider) {
             controller: 'invoice-ctrl',
             activetab: 'invoices'
         })
+
+        .when('/invoice/print/:id', {
+            templateUrl: 'pages/invoice-print.html',
+            controller: 'invoice-print-ctrl',
+            activetab: 'print'
+        })
 });
