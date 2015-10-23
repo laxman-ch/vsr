@@ -25,7 +25,7 @@
                         <label for="group_name">From Department</label>
                         <select class="form-control" ng-init="submitData.fromDepartment" ng-model="submitData.fromDepartment">
                             <option value="">Select</option>
-                            <option ng-repeat="department in departments" value="{{department.id}}">
+                            <option ng-selected="department.id == submitData.fromDepartment" ng-repeat="department in departments" value="{{department.id}}">
                                 {{department.name}}
                             </option>
                         </select>
@@ -36,7 +36,7 @@
                         <label for="group_name">To Department</label>
                         <select class="form-control" ng-init="submitData.toDepartment" ng-model="submitData.toDepartment">
                             <option value="">Select</option>
-                            <option ng-repeat="department in departments" value="{{department.id}}">
+                            <option ng-selected="department.id == submitData.toDepartment" ng-repeat="department in departments" value="{{department.id}}">
                                 {{department.name}}
                             </option>
                         </select>
@@ -59,9 +59,10 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="group_name">FromTo Station</label>
-                        <select class="form-control" ng-init="submitData.faremap" ng-model="submitData.faremap">
+                        <select class="form-control" ng-model="submitData.faremap" 
+                        ng-change="setFareRate($event)" >
                             <option value="">Select</option>
-                            <option ng-repeat="faremap in fares" value="{{faremap.id}}">
+                            <option ng-selected="faremap.id == submitData.faremap" ng-repeat="faremap in fares" value="{{faremap.id}}">
                                 {{faremap.fromStation.shortCode}} -> {{faremap.toStation.shortCode}}
                             </option>
                         </select>
@@ -97,7 +98,7 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="type">Freight</label>
-                        <input type="number" class="form-control" placeholder="Freight" ng-model="submitData.freight">
+                        <input type="number" class="form-control" placeholder="Freight" readonly value="{{submitData.weight * fareRate}}" >
                     </div>
                 </div>
 
@@ -151,6 +152,7 @@
                     <div class="form-group">
                         <label for="type">Total</label>
                         <input type="number" ng-readonly="true" class="form-control" placeholder="Grand Total" value="{{
+                        submitData.freight +
                         submitData.valueSurcharge + 
                         submitData.doordelCharges + 
                         submitData.articleCharges + 

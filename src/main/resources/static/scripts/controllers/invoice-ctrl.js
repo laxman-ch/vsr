@@ -178,6 +178,22 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
     $scope.action = dataToModal.action;
     $scope.departments = dataToModal.departments;
     $scope.fares = dataToModal.fares;
+    $scope.fareRate = 0;
+
+    $scope.setFareRate = function() {
+        var isDefined = false;
+        for(var i = 0; i < $scope.fares.length; i++) {
+            if($scope.submitData.faremap == $scope.fares[i].id) {
+                $scope.fareRate =  $scope.fares[i].fare;
+                isDefined = true;
+                break;               
+            }
+        }
+
+        if(isDefined == false) {
+            $scope.fareRate = 0;
+        }
+    }
     
     $scope.ok = function () {
 
@@ -187,6 +203,8 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
                         $scope.submitData.statCharges + 
                         $scope.submitData.handlingCharges +  
                         $scope.submitData.otherCharges;
+
+        $scope.submitData.freight = $scope.submitData.weight * $scope.fareRate;
 
         $modalInstance.close({
             submitData: $scope.submitData,
@@ -210,7 +228,7 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
                     $scope.submitData.fromDepartment = response.data.fromDepartment.id;
                     $scope.submitData.toDepartment = response.data.toDepartment.id;
                     $scope.submitData.date = new Date($scope.submitData.date);
-
+                    $scope.setFareRate();
                     
                 }
 
