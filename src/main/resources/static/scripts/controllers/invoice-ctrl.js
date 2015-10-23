@@ -84,7 +84,7 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
     };
 
     $scope.printItem = function (id) {
-        window.open('#/invoice/print/' + id, "", "width=900, height=700");
+        window.open('invoice_print.html?invoice_id=' + id, "", "width=1024, height=768");
     };
 
     $scope.submitData = function (modalData) {
