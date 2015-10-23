@@ -209,7 +209,7 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
                         $scope.submitData.statCharges + 
                         $scope.submitData.handlingCharges;
 
-        $scope.submitData.freight = $scope.submitData.weight * $scope.fareRate;
+        $scope.submitData.freight = $scope.submitData.weight * $scope.fareRate/100;
 
         $scope.submitData.total = $scope.submitData.freight + $scope.submitData.otherCharges;
 

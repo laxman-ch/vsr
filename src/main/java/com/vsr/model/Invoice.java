@@ -37,7 +37,6 @@ public class Invoice {
 
     @Basic
     @Column(name = "date", nullable = false, insertable = true, updatable = true)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone="IST")
     private Date date;
 
     @OneToOne(fetch = FetchType.EAGER)

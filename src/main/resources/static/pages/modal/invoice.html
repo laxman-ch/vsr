@@ -111,7 +111,7 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="type">Door Delivery Charges</label>
-                        <input type="number" class="form-control" placeholder="Door Delivery Charges" ng-model="submitData.doordelCharges" ng-value="200">
+                        <input type="number" class="form-control" placeholder="Door Delivery Charges" ng-model="submitData.doordelCharges">
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="type">Stat Charges</label>
-                        <input type="number" class="form-control" placeholder="Stat Charges" ng-model="submitData.statCharges" ng-value="10">
+                        <input type="number" class="form-control" placeholder="Stat Charges" ng-model="submitData.statCharges">
                     </div>
                 </div>
 
@@ -134,35 +134,12 @@
                         <input type="number" class="form-control" placeholder="Handling Charges" ng-model="submitData.handlingCharges" value="{{1 * submitData.packageCount}}" ng-readonly="true">
                     </div>
                 </div>
-<!--
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="type">Other Charges</label>
-                        <input type="number" ng-readonly="true" class="form-control" placeholder="Other Charges" ng-model="submitData.otherCharges" value="{{
-                        submitData.valueSurcharge +
-                        submitData.doordelCharges +
-                        submitData.articleCharges +
-                        submitData.statCharges +
-                        submitData.handlingCharges}}">
-                    </div>
-                </div>
--->
-
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="type">Description</label>
                         <textarea class="form-control" placeholder="Description" ng-model="submitData.description"></textarea>
                     </div>
                 </div>
-<!--
-
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="type">Total</label>
-                        <input type="number" ng-readonly="true" class="form-control" placeholder="Grand Total" value="{{submitData.freight + submitData.otherCharges}}">
-                    </div>
-                </div>
--->
             </div>
         </form>
     </div>

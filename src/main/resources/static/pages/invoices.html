@@ -71,7 +71,7 @@
 		<tr ng-repeat="data in $data">
 			<td><input type="checkbox"/></td>
 			<td>{{data.waybillNumber}}</td>
-			<td>{{data.date}}</td>
+			<td>{{data.date |date:"dd-MM-yyyy"}}</td>
 			<td>{{data.fromDepartment.shortCode}}</td>
 			<td>{{data.toDepartment.shortCode}}</td>
 			<td>{{data._embedded.faremap.fromStation.shortCode}}</td>
