@@ -1,5 +1,6 @@
 package com.vsr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,6 +37,7 @@ public class Invoice {
 
     @Basic
     @Column(name = "date", nullable = false, insertable = true, updatable = true)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone="IST")
     private Date date;
 
     @OneToOne(fetch = FetchType.EAGER)

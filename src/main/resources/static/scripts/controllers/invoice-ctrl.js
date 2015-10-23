@@ -196,15 +196,22 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
     }
     
     $scope.ok = function () {
+        $scope.submitData.valueSurcharge = $scope.submitData.goodsValue/1000;
+        if($scope.submitData.valueSurcharge < 5)
+            $scope.submitData.valueSurcharge = 5.00;
 
-        $scope.submitData.total = $scope.submitData.valueSurcharge + 
+        $scope.submitData.articleCharges = 1 * $scope.submitData.packageCount;
+        $scope.submitData.handlingCharges = 1 * $scope.submitData.packageCount;
+
+        $scope.submitData.otherCharges = $scope.submitData.valueSurcharge +
                         $scope.submitData.doordelCharges + 
                         $scope.submitData.articleCharges + 
                         $scope.submitData.statCharges + 
-                        $scope.submitData.handlingCharges +  
-                        $scope.submitData.otherCharges;
+                        $scope.submitData.handlingCharges;
 
         $scope.submitData.freight = $scope.submitData.weight * $scope.fareRate;
+
+        $scope.submitData.total = $scope.submitData.freight + $scope.submitData.otherCharges;
 
         $modalInstance.close({
             submitData: $scope.submitData,

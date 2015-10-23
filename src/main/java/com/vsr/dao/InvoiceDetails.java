@@ -1,5 +1,6 @@
 package com.vsr.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vsr.model.Department;
 import com.vsr.model.Faremap;
 import com.vsr.model.Invoice;
@@ -20,6 +21,7 @@ public interface InvoiceDetails {
 
     public Department getToDepartment();
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone="IST")
     public Date getDate();
 
     public Faremap getFaremap();
