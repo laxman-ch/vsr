@@ -1,0 +1,152 @@
+<div class="container">
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>Waybill Number</label>
+  	<div class="field-value">{{data.waybillNumber}}</div>
+  </div>
+  <div class="col-xs-6">
+  	<label>Date</label>
+  	<div class="field-value">{{data.date | date}}</div>
+  </div>
+</div>
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>From Department</label>
+  	<div class="field-value">{{data.fromDepartment.name}} ({{data.fromDepartment.shortCode}}) </div>
+  </div>
+  <div class="col-xs-6">
+  	<label>To Department</label>
+  	<div class="field-value">{{data.toDepartment.name}} ({{data.toDepartment.shortCode}}) </div>
+  </div>
+</div>
+
+
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>From Address</label>
+  	<div class="field-value">{{data.fromAddress}}</div>
+  </div>
+  <div class="col-xs-6">
+  	<label>To Address</label>
+  	<div class="field-value">{{data.toAddress}}</div>
+  </div>
+</div>
+
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>From-To Station</label>
+  	<div class="field-value">{{data._embedded.faremap.fromStation.stationName}}, {{data._embedded.faremap.fromStation.state}} to {{data._embedded.faremap.toStation.stationName}}, {{data._embedded.faremap.toStation.state}}</div>
+  </div>
+  <div class="col-xs-6">
+  	<label>DC Number</label>
+  	<div class="field-value">{{data.dcNumber}}</div>
+  </div>
+</div>
+
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>Goods value</label>
+  	<div class="field-value">{{data.goodsValue}}</div>
+  </div>
+  <div class="col-xs-6">
+  	<label>Package Count</label>
+  	<div class="field-value">{{data.packageCount}}</div>
+  </div>
+</div>
+
+<div class="row mt-10 invoice-field clearfix">
+  <div class="col-xs-6">
+  	<label>Weight (KG)</label>
+  	<div class="field-value">{{data.weight}}</div>
+  </div>
+  <div class="col-xs-6">
+  	<label>Freight</label>
+  	<div class="field-value">{{data.freight}}</div>
+  </div>
+</div>
+
+<div class="row mt-10">
+  <div class="col-md-12">
+  	<label>Description</label>
+  	<div class="field-value">{{data.description}}</div>
+  </div>
+</div>
+
+
+<div class="row mt-10 ">
+  <div class="col-md-12 charges-header">
+  	Charges
+  </div>
+</div>
+
+<div class="row mt-10">
+  <div class="clear">
+  	<div class="col-md-3">
+  		<label>Value Surcharge</label>
+  	</div>
+  	<div class="col-md-3">
+  		<div class="field-value price">{{data.valueSurcharge}}</div>
+  	</div>
+  </div>
+  <div class="clear">
+	  <div class="col-md-3">
+	  	<label>Door Delivery Charges</label>
+	  </div>
+  	  <div class="col-md-3">
+	  	<div class="field-value price">{{data.doordelCharges}}</div>
+	  </div>
+  </div>
+
+  <div class="clear">
+	  <div class="col-md-3">
+	  	<label>Article Charges</label>
+	  	</div>
+  	  <div class="col-md-3">
+	  	<div class="field-value price">{{data.articleCharges}}</div>
+	  </div>
+ </div>
+ <div class="clear">
+	  <div class="col-md-3">
+	  	<label>Stat Charges</label>
+	  </div>
+  	  <div class="col-md-3">	
+	  	<div class="field-value price">{{data.statCharges}}</div>
+	  </div>
+  </div>
+
+  <div class="clear">
+	  <div class="col-md-3">
+	  	<label>Handling Charges</label>
+	  	</div>
+  	  	<div class="col-md-3">
+	  	<div class="field-value price">{{data.handlingCharges}}</div>
+	  </div>
+  </div>
+	<div class="clear"> 
+		<div class="col-md-3">
+		<label>Other Charges</label>
+		</div>
+  	  	<div class="col-md-3">
+		<div class="field-value price">{{data.otherCharges}}</div>
+	</div>
+	</div>
+
+	<div  class="clear total clearfix">
+		<div class="col-md-3">
+	  		<label>Total</label>
+	  	</div>
+  	  	<div class="col-md-3">
+	  		<div class="field-value price">{{data.total}}</div>
+	  	</div>
+  	</div>
+</div>
+<div class="text-center mt-10 no-print">
+	<input type="button" class="btn btn-primary" value="Print" ng-click="print()" />
+</div>
+<div class="text-center mt-10">
+</div>
+</div>
+
+
+
+
