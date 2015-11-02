@@ -4,7 +4,12 @@ app.controller('department-ctrl', function ($scope, $http, $filter, $modal, ngTa
     $scope.getList = function (callback) {
         $http({
             method: 'GET',
-            url: '/departments'
+            url: '/departments',
+            params: {
+                page: 0,
+                size: 2000,
+                sort: 'name'
+            }
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
                 $scope.departments = response.data._embedded.departments;
@@ -39,7 +44,7 @@ app.controller('department-ctrl', function ($scope, $http, $filter, $modal, ngTa
     $scope.initTable = function () {
         $scope.tableParams = new ngTableParams({
             page: 1,
-            count: 10,
+            count: 25,
             sorting: {
                 "name": "asc"
             }

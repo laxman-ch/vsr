@@ -1,5 +1,7 @@
 package com.vsr.boot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -17,8 +19,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @PropertySource("application.properties")
 public class Application {
-
-    public static void main(String[] args) {
+    private static Logger log = LoggerFactory.getLogger(Application.class);
+    public static void main(String[] args) throws Exception {
+        log.info("++++++++++++++++++++++++++++START++++++++++++++++++++++++++++");
+//        Log4jConfigurer.initLogging("classpath:log4j.properties");
         SpringApplication.run(Application.class, args);
     }
 

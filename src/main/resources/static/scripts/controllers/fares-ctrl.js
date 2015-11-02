@@ -5,7 +5,12 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
 
         $http({
             method: 'GET',
-            url: '/fares'
+            url: '/fares',
+            params: {
+                page: 0,
+                size: 2000,
+                sort: 'fromStation.stationName'
+            }
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
 
@@ -122,8 +127,8 @@ app.controller('fares-ctrl', function ($scope, $http, $filter, $modal, ngTablePa
         $http({
             method: 'GET',
             url: '/stations',
-            data: {
-                page: 1,
+            params: {
+                page: 0,
                 size: 2000,
                 sort: 'stationName'
             }

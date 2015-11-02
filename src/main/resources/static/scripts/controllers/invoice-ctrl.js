@@ -5,7 +5,13 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
 
         $http({
             method: 'GET',
-            url: '/invoices?projection=invoice_details'
+            url: '/invoices',
+            params: {
+                page: 0,
+                size: 9999999,
+                sort: 'date,desc',
+                projection: 'invoice_details'
+            }
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
                 $scope.invoices = response.data._embedded.invoices;
@@ -40,9 +46,9 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
     $scope.initTable = function () {
         $scope.tableParams = new ngTableParams({
             page: 1,
-            count: 2000,
+            count: 25,
             sorting: {
-                "waybillNumber": "asc"
+                "date": "desc"
             }
         }, {
             counts: [],
@@ -121,11 +127,12 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
     $scope.getAllFares = function () {
         $http({
             method: 'GET',
-            url: '/fares?projection=fare_details',
+            url: '/fares',
             data: {
-                page: 1,
+                page: 0,
                 size: 2000,
-                sort: 'fromStation.stationName,toStation.stationName'
+                sort: 'fromStation.stationName,toStation.stationName',
+                projection: 'fare_details'
             }
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
@@ -145,7 +152,7 @@ app.controller('invoice-ctrl', function ($scope, $http, $filter, $modal, ngTable
             method: 'GET',
             url: '/departments',
             data: {
-                page: 1,
+                page: 0,
                 size: 2000,
                 sort: 'name'
             }
@@ -242,6 +249,10 @@ app.controller('invoiceModalCtrl', function ($scope, $http, $modalInstance, data
             }, function (response) {
 
             });
+        } else {
+            $scope.submitData = {};
+            $scope.submitData.doordelCharges = 200;
+            $scope.submitData.statCharges = 10;
         }
     };
 

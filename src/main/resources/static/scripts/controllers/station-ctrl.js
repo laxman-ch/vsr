@@ -4,7 +4,12 @@ app.controller('station-ctrl', function ($scope, $http, $filter, $modal, ngTable
     $scope.getList = function (callback) {
         $http({
             method: 'GET',
-            url: '/stations'
+            url: '/stations',
+            params: {
+                page: 0,
+                size: 2000,
+                sort: 'stationName'
+            }
         }).then(function (response) {
             if (typeof response.data._embedded != 'undefined') {
                 $scope.stations = response.data._embedded.stations;
@@ -111,9 +116,7 @@ app.controller('station-ctrl', function ($scope, $http, $filter, $modal, ngTable
     };
 
     $scope.init();
-
 });
-
 
 app.controller('stationModalCtrl', function ($scope, $http, $modalInstance, dataToModal) {
     $scope.action = dataToModal.action;

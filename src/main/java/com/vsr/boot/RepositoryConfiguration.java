@@ -20,6 +20,7 @@ public class RepositoryConfiguration extends RepositoryRestMvcConfiguration {
         config.exposeIdsFor(Station.class, Department.class, Faremap.class, Invoice.class);
         config.projectionConfiguration().addProjection(FareDetails.class);
         config.projectionConfiguration().addProjection(InvoiceDetails.class);
+        config.setMaxPageSize(Integer.MAX_VALUE);
         super.configureRepositoryRestConfiguration(config);
     }
 }
